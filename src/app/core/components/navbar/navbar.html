@@ -1,0 +1,128 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-card-bg border-b border-border-brutalist h-16 sm:h-20 grid grid-cols-2 sm:grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-8">
+  <!-- Brand / Logo (Column 1) -->
+  <a routerLink="/" fragment="home" (click)="closeMenu()" 
+     class="font-mono text-sm uppercase tracking-widest text-white font-bold flex items-center gap-2 select-none group justify-self-start">
+      <span class="w-2.5 h-2.5 bg-accent-cyan smooth-interactive group-hover:scale-110"></span> 
+      WILMER.DEV
+  </a>
+
+  <!-- Desktop Navigation (Centered in Column 2) -->
+  <nav class="hidden sm:flex items-center justify-self-center gap-1 md:gap-3 lg:gap-4">
+      <a routerLink="/" fragment="home"
+         class="smooth-interactive flex items-center gap-2 px-2.5 py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-wider whitespace-nowrap shrink-0"
+         [class.text-accent-cyan]="activeSection() === 'home'"
+         [class.text-text-muted]="activeSection() !== 'home'"
+         [class.hover:text-white]="activeSection() !== 'home'">
+          <i class="fas fa-home text-[10px] shrink-0"></i>
+          <span class="whitespace-nowrap">Inicio</span>
+      </a>
+      <a routerLink="/" fragment="about"
+         class="smooth-interactive flex items-center gap-2 px-2.5 py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-wider whitespace-nowrap shrink-0"
+         [class.text-accent-cyan]="activeSection() === 'about'"
+         [class.text-text-muted]="activeSection() !== 'about'"
+         [class.hover:text-white]="activeSection() !== 'about'">
+          <i class="fas fa-user text-[10px] shrink-0"></i>
+          <span class="whitespace-nowrap">Sobre&nbsp;Mí</span>
+      </a>
+      <a routerLink="/" fragment="stack"
+         class="smooth-interactive flex items-center gap-2 px-2.5 py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-wider whitespace-nowrap shrink-0"
+         [class.text-accent-cyan]="activeSection() === 'stack'"
+         [class.text-text-muted]="activeSection() !== 'stack'"
+         [class.hover:text-white]="activeSection() !== 'stack'">
+          <i class="fas fa-layer-group text-[10px] shrink-0"></i>
+          <span class="whitespace-nowrap">Tecnologías</span>
+      </a>
+      <a routerLink="/" fragment="certifications"
+         class="smooth-interactive flex items-center gap-2 px-2.5 py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-wider whitespace-nowrap shrink-0"
+         [class.text-accent-cyan]="activeSection() === 'certifications'"
+         [class.text-text-muted]="activeSection() !== 'certifications'"
+         [class.hover:text-white]="activeSection() !== 'certifications'">
+          <i class="fas fa-certificate text-[10px] shrink-0"></i>
+          <span class="whitespace-nowrap">Certificaciones</span>
+      </a>
+      <a routerLink="/" fragment="projects"
+         class="smooth-interactive flex items-center gap-2 px-2.5 py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-wider whitespace-nowrap shrink-0"
+         [class.text-accent-cyan]="activeSection() === 'projects'"
+         [class.text-text-muted]="activeSection() !== 'projects'"
+         [class.hover:text-white]="activeSection() !== 'projects'">
+          <i class="fas fa-code-branch text-[10px] shrink-0"></i>
+          <span class="whitespace-nowrap">Proyectos</span>
+      </a>
+      <a routerLink="/" fragment="contact"
+         class="smooth-interactive flex items-center gap-2 px-2.5 py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-wider whitespace-nowrap shrink-0"
+         [class.text-accent-cyan]="activeSection() === 'contact'"
+         [class.text-text-muted]="activeSection() !== 'contact'"
+         [class.hover:text-white]="activeSection() !== 'contact'">
+          <i class="fas fa-paper-plane text-[10px] shrink-0"></i>
+          <span class="whitespace-nowrap">Contacto</span>
+      </a>
+  </nav>
+
+  <!-- Right Actions / Controls Container (Column 3) -->
+  <div class="justify-self-end flex items-center">
+      <!-- Desktop CV Action -->
+      <a href="CV_WILMER_OGOSI.pdf" download
+         class="hidden sm:flex smooth-interactive px-4 py-2 border border-border-brutalist text-slate-300 hover:text-white hover:border-slate-500 font-mono text-[10px] uppercase tracking-wider bg-slate-900/40">
+          <i class="fas fa-download mr-1.5 text-accent-cyan"></i> CV
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button (click)="toggleMenu()" 
+              [attr.aria-expanded]="isMenuOpen()" 
+              aria-controls="mobile-menu"
+              aria-label="Menú de navegación"
+              class="sm:hidden w-10 h-10 border border-border-brutalist flex flex-col items-center justify-center gap-1.5 focus:outline-none bg-slate-900/40 relative">
+          <span class="w-5 h-0.5 bg-white transition-all duration-300 transform" [class.rotate-45]="isMenuOpen()" [class.translate-y-2]="isMenuOpen()"></span>
+          <span class="w-5 h-0.5 bg-white transition-all duration-300" [class.opacity-0]="isMenuOpen()"></span>
+          <span class="w-5 h-0.5 bg-white transition-all duration-300 transform" [class.-rotate-45]="isMenuOpen()" [class.-translate-y-2]="isMenuOpen()"></span>
+      </button>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<nav id="mobile-menu" 
+     [class.hidden]="!isMenuOpen()"
+     class="fixed inset-0 top-16 z-40 bg-[#050505] border-b border-border-brutalist flex flex-col p-6 gap-5 sm:hidden font-mono uppercase tracking-widest overflow-y-auto">
+  <a routerLink="/" fragment="home" (click)="closeMenu()"
+     class="smooth-interactive py-3.5 border-b border-border-brutalist flex items-center justify-between text-sm"
+     [class.text-accent-cyan]="activeSection() === 'home'"
+     [class.text-slate-300]="activeSection() !== 'home'">
+      <span class="flex items-center gap-3"><i class="fas fa-home text-xs"></i> Inicio</span>
+      <span class="text-xs font-bold opacity-30">01</span>
+  </a>
+  <a routerLink="/" fragment="about" (click)="closeMenu()"
+     class="smooth-interactive py-3.5 border-b border-border-brutalist flex items-center justify-between text-sm"
+     [class.text-accent-cyan]="activeSection() === 'about'"
+     [class.text-slate-300]="activeSection() !== 'about'">
+      <span class="flex items-center gap-3"><i class="fas fa-user text-xs"></i> Sobre&nbsp;Mí</span>
+      <span class="text-xs font-bold opacity-30">02</span>
+  </a>
+  <a routerLink="/" fragment="stack" (click)="closeMenu()"
+     class="smooth-interactive py-3.5 border-b border-border-brutalist flex items-center justify-between text-sm"
+     [class.text-accent-cyan]="activeSection() === 'stack'"
+     [class.text-slate-300]="activeSection() !== 'stack'">
+      <span class="flex items-center gap-3"><i class="fas fa-layer-group text-xs"></i> Tecnologías</span>
+      <span class="text-xs font-bold opacity-30">03</span>
+  </a>
+  <a routerLink="/" fragment="certifications" (click)="closeMenu()"
+     class="smooth-interactive py-3.5 border-b border-border-brutalist flex items-center justify-between text-sm"
+     [class.text-accent-cyan]="activeSection() === 'certifications'"
+     [class.text-slate-300]="activeSection() !== 'certifications'">
+      <span class="flex items-center gap-3"><i class="fas fa-certificate text-xs"></i> Certificaciones</span>
+      <span class="text-xs font-bold opacity-30">04</span>
+  </a>
+  <a routerLink="/" fragment="projects" (click)="closeMenu()"
+     class="smooth-interactive py-3.5 border-b border-border-brutalist flex items-center justify-between text-sm"
+     [class.text-accent-cyan]="activeSection() === 'projects'"
+     [class.text-slate-300]="activeSection() !== 'projects'">
+      <span class="flex items-center gap-3"><i class="fas fa-code-branch text-xs"></i> Proyectos</span>
+      <span class="text-xs font-bold opacity-30">05</span>
+  </a>
+  <a routerLink="/" fragment="contact" (click)="closeMenu()"
+     class="smooth-interactive py-3.5 border-b border-border-brutalist flex items-center justify-between text-sm"
+     [class.text-accent-cyan]="activeSection() === 'contact'"
+     [class.text-slate-300]="activeSection() !== 'contact'">
+      <span class="flex items-center gap-3"><i class="fas fa-paper-plane text-xs"></i> Contacto</span>
+      <span class="text-xs font-bold opacity-30">06</span>
+  </a>
+</nav>

@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-dark-bg: #050505;
+  --color-card-bg: #0c0c0c;
+  --color-accent-cyan: #00f0ff;
+  --color-accent-yellow: #fff500;
+  --color-border-brutalist: #2a2a2a;
+  --color-text-muted: #8c8c8c;
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  /* Fluid Typography Tokens (Viewport range: 320px to 1280px) */
+  --text-fluid-h1: clamp(2rem, 1.25rem + 2.5vw, 3.5rem);            /* 32px to 56px */
+  --text-fluid-h2: clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem);          /* 24px to 40px */
+  --text-fluid-h3: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);          /* 18.4px to 22.4px */
+  --text-fluid-body: clamp(0.95rem, 0.917rem + 0.166vw, 1.05rem);   /* 15.2px to 16.8px */
+
+  /* Fluid Spacing Tokens */
+  --spacing-fluid-section: clamp(2rem, 1.333rem + 3.33vw, 4rem);    /* 32px to 64px */
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2d2d2d;
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+}
+
+/* Base Body with Noise Texture */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* Matches the desktop header height (h-20 = 80px) */
+}
+
+@media (max-width: 639px) {
+    html {
+        scroll-padding-top: 4rem; /* Matches the mobile header height (h-16 = 64px) */
+    }
+}
+
+body {
+    background-color: #050505;
+    color: #e5e5e5;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.04; /* Very subtle grain */
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Brutalist Card styles - clean, sharp borders, no blur shadows */
+.brutalist-card {
+    background: #0c0c0c;
+    border: 1px solid var(--color-border-brutalist);
+    border-radius: 0; /* Sharp corners represent precision */
+}
+
+.brutalist-card:hover {
+    border-color: #404040;
+}
+
+/* Hardware accelerated transition animations to optimize INP */
+.smooth-interactive {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+/* Ensure Angular component hosts behave as block-level elements for proper layout and intersection observer tracking */
+app-hero,
+app-about,
+app-stack,
+app-certifications,
+app-projects,
+app-contact {
+    display: block;
+    width: 100%;
+}
+
+/* Height-based media query to prevent vertical layout overflow on laptop and low-height viewports */
+@media (max-height: 800px) {
+    :root {
+        --spacing-fluid-section: clamp(1.25rem, 1rem + 1vw, 2rem);
+        --text-fluid-h1: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem); /* Capped at 40px on laptop screens */
+        --text-fluid-h2: clamp(1.35rem, 1.15rem + 1vw, 1.85rem);
+    }
+    
+    .brutalist-card {
+        padding: 1.25rem !important;
+    }
+    
+    /* Make the hero card margins tighter */
+    app-hero section {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    app-hero article h1 {
+        margin-bottom: 1rem !important;
+    }
+    
+    app-hero article p {
+        margin-bottom: 1.25rem !important;
+    }
+    
+    app-hero aside div.w-28 {
+        width: 5.5rem !important;
+        height: 5.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    app-hero aside h2 {
+        font-size: 1.25rem !important;
+    }
+    
+    app-hero aside p {
+        margin-bottom: 1rem !important;
+    }
+}
+
