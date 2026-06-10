@@ -1,0 +1,32 @@
+<section id="certifications" aria-labelledby="certifications-title" class="mb-fluid-section">
+    <div class="flex items-center gap-4 mb-8">
+        <h2 id="certifications-title" class="text-fluid-h2 font-extrabold uppercase tracking-wider text-white">Certificaciones</h2>
+        <span class="h-px bg-border-brutalist flex-1"></span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+
+        @for (cert of certifications(); track cert.id) {
+            <article class="brutalist-card p-6 smooth-interactive">
+                <div class="flex items-center justify-between gap-3 mb-4">
+                    <div class="w-12 h-12 bg-slate-900 border border-border-brutalist flex items-center justify-center">
+                        <i [class]="cert.icon + ' text-xl'"></i>
+                    </div>
+                    <span class="px-2 py-1 border text-xs font-mono" [class]="cert.statusBorderClass + ' ' + cert.statusTextClass">
+                        {{ cert.status }}
+                    </span>
+                </div>
+                
+                <h3 class="text-fluid-h3 font-bold text-white mb-2 uppercase tracking-tight">{{ cert.title }}</h3>
+                <p class="text-slate-500 text-xs font-mono uppercase tracking-wider mb-4">{{ cert.provider }}</p>
+                
+                <div class="flex flex-wrap gap-2 text-[10px] font-mono">
+                    @for (tag of cert.tags; track tag) {
+                        <span class="px-2 py-1 bg-slate-900 border border-border-brutalist text-slate-300">{{ tag }}</span>
+                    }
+                </div>
+            </article>
+        }
+
+    </div>
+</section>

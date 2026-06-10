@@ -1,0 +1,45 @@
+<!-- Navigation -->
+<app-navbar></app-navbar>
+
+<!-- Main Page Wrapper -->
+<main class="pt-16 sm:pt-20 min-h-screen relative w-full bg-dark-bg text-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-4 sm:px-6 sm:py-6 md:px-8 lg:px-12">
+    
+    <!-- Hero / Inicio Section (Immediate load) -->
+    <app-hero id="home" appActiveSection></app-hero>
+
+    <!-- About Section (Immediate load) -->
+    <app-about id="about" appActiveSection></app-about>
+
+    <!-- Tech Stack Section (Immediate load) -->
+    <app-stack id="stack" appActiveSection></app-stack>
+
+    <!-- Certifications Section (Lazy loaded on viewport approach) -->
+    @defer (on viewport) {
+      <app-certifications id="certifications" appActiveSection></app-certifications>
+    } @placeholder {
+      <div class="h-32 flex items-center justify-center text-slate-500 border border-slate-800/50 rounded-xl my-6">
+        <span class="text-sm font-medium">Cargando certificaciones...</span>
+      </div>
+    }
+
+    <!-- Projects Section (Lazy loaded on viewport approach) -->
+    @defer (on viewport) {
+      <app-projects id="projects" appActiveSection></app-projects>
+    } @placeholder {
+      <div class="h-64 flex items-center justify-center text-slate-500 border border-slate-800/50 rounded-xl my-6">
+        <span class="text-sm font-medium">Cargando proyectos destacados...</span>
+      </div>
+    }
+
+    <!-- Contact Section (Lazy loaded on viewport approach) -->
+    @defer (on viewport) {
+      <app-contact id="contact" appActiveSection></app-contact>
+    } @placeholder {
+      <div class="h-32 flex items-center justify-center text-slate-500 border border-slate-800/50 rounded-xl my-6">
+        <span class="text-sm font-medium">Cargando formulario de contacto...</span>
+      </div>
+    }
+
+  </div>
+</main>

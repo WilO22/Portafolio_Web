@@ -1,0 +1,59 @@
+<section id="projects" aria-labelledby="projects-title" class="mb-fluid-section">
+    <h2 id="projects-title" class="text-fluid-h2 font-extrabold uppercase tracking-wider text-white mb-8 border-l-4 border-accent-cyan pl-4">Proyectos Destacados</h2>
+
+    <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border-brutalist before:to-transparent">
+
+        @for (project of projects(); track project.id; let odd = $odd) {
+            <article class="relative flex items-center justify-between md:justify-normal group"
+                     [class.md:flex-row-reverse]="odd"
+                     [class.is-active]="project.active">
+                     
+                <!-- Icon Dot -->
+                <div class="flex items-center justify-center w-10 h-10 rounded-none border border-border-brutalist bg-[#0c0c0c] text-slate-400 group-hover:border-slate-400 group-hover:text-white transition-colors shrink-0 md:order-1"
+                     [class.md:-translate-x-1/2]="odd"
+                     [class.md:translate-x-1/2]="!odd">
+                    <i [class]="project.icon + ' text-xs'"></i>
+                </div>
+                
+                <!-- Content Card -->
+                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] brutalist-card p-6 smooth-interactive">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-fluid-h3 font-bold text-white uppercase tracking-tight">{{ project.title }}</h3>
+                        
+                        <div class="flex gap-2">
+                            @if (project.demoUrl) {
+                                <a [href]="project.demoUrl" target="_blank" rel="noopener" [attr.aria-label]="'Ver demo de ' + project.title"
+                                   class="smooth-interactive w-8 h-8 border border-border-brutalist hover:border-slate-500 text-slate-400 hover:text-accent-cyan flex items-center justify-center">
+                                    <i class="fas fa-external-link-alt text-xs"></i>
+                                </a>
+                            }
+                            @if (project.githubUrl) {
+                                <a [href]="project.githubUrl" target="_blank" rel="noopener" [attr.aria-label]="'Repositorio frontend de ' + project.title"
+                                   class="smooth-interactive w-8 h-8 border border-border-brutalist hover:border-slate-500 text-slate-400 hover:text-white flex items-center justify-center">
+                                    <i class="fab fa-github text-xs"></i>
+                                </a>
+                            }
+                            @if (project.backendUrl) {
+                                <a [href]="project.backendUrl" target="_blank" rel="noopener" [attr.aria-label]="'Repositorio backend de ' + project.title"
+                                   class="smooth-interactive w-8 h-8 border border-border-brutalist hover:border-slate-500 text-slate-400 hover:text-orange-400 flex items-center justify-center">
+                                    <i class="fas fa-server text-xs"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    
+                    <p class="text-fluid-body text-slate-400 mb-6 font-sans">
+                        {{ project.description }}
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2 text-[10px] font-mono">
+                        @for (tag of project.tags; track tag) {
+                            <span class="px-2 py-1 bg-slate-900 border border-border-brutalist text-slate-300">{{ tag }}</span>
+                        }
+                    </div>
+                </div>
+            </article>
+        }
+
+    </div>
+</section>
